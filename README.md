@@ -1,1 +1,1 @@
-A simple command-line application.
+practice for writing code in a new programming language :)
