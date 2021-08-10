@@ -17,6 +17,6 @@ void method_1() {
 }
 
 void method_2() {
-  print(list..where((element) => !forbiddenValues.contains(element)));
+  print(list.where((element) => !forbiddenValues.contains(element)));
   stdout.write('\n');
 }

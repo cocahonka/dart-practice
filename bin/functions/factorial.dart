@@ -27,4 +27,4 @@ int method_3(int value) => value.factorial();
 
 int method_4(int value) => value.prefixFactorial().last;
 
-int method_5(int value) => value == 0 ? 1 : value * method_5(--value);
+int method_5(int value) => value == 1 ? 1 : value * method_5(--value);

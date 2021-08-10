@@ -35,9 +35,8 @@ void method_1(int begin, int end) {
 }
 
 void method_2(int begin, int end) {
-  while (begin < end) {
+  while (begin++ < end) {
     stdout.write('$begin ');
-    begin++;
   }
   stdout.write('\n\n');
 }
