@@ -10,6 +10,8 @@ include: package:pedantic/analysis_options.yaml
 # linter:
 #  rules:
 
-# analyzer:
+#analyzer:
+#  enable-experiment:
+#    - variance
 #   exclude:
 #     - path/to/excluded/files/**
