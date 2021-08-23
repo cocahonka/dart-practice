@@ -7,7 +7,7 @@ class Minesweeper {
 
   Minesweeper(this._mineField) {
     _mineField.asMap().forEach((y, row) {
-      List<String> annotatedRow = [];
+      var annotatedRow = <String>[];
       row.split('').asMap().forEach((x, value) {
         annotatedRow.add((value == _mine) ? _mine : _count_mines(x, y));
       });
