@@ -1,44 +1,11 @@
 import 'dart:convert';
 import 'dart:io';
 
-import 'package:pedantic/pedantic.dart' show unawaited;
-
-abstract class A {
-  Future<int> cum();
-  void m(Function(int) ac);
-}
-
-class B extends A {
-  @override
-  Future<int> cum() async {
-    // TODO: implement cum
-    throw UnimplementedError();
-  }
-
-  @override
-  void m(Function(int p1) ac) {
-    // TODO: implement m
-  }
-}
-
-Future<Null> someFunction() async {
-  var file = File('/path/to/my/file');
-  var now = DateTime.now();
-  if ((await file.lastModified()).isBefore(now)) print('before'); // LINT
-}
-
 void main() async {
   final fileWorker = FileWorker('jump_from_the_cliff.txt', 'text.txt');
-  var content = unawaited(fileWorker.getInputContent());
-  // await Future.delayed(const Duration(seconds: 1));
-  //content.forEach(print);
-  // await fileWorker.transferData();
-
-  // var contentSync = fileWorker.getInputContentSync();
-  // contentSync.forEach((line) => print('sync :: $line'));
-
-  // var content = await fileWorker.getInputContent();
-  // content.forEach((line) => print(line));
+  await fileWorker.transferData();
+  // fileWorker.getInputContentSync().forEach(print);
+  // fileWorker.getInputContent().then((value) => value.forEach(print));
 }
 
 class FileWorker {
@@ -63,23 +30,15 @@ class FileWorker {
   }
 
   Future<void> transferData() async {
-    var access = await outputFile.open(mode: FileMode.write);
-    inputFile
-        .openRead()
-        .transform(utf8.decoder)
-        .listen((char) => access.writeString(char));
+    var buffer = StringBuffer();
+    var chars = inputFile.openRead().transform(utf8.decoder);
+    await for (var char in chars) {
+      buffer.write(char);
+    }
+    await outputFile.writeAsString(buffer.toString());
   }
 
-  List<String> getInputContentSync() {
-    var content = <String>[];
-    var access = inputFile.openSync(mode: FileMode.read);
-    var length = access.lengthSync();
-
-    var bytes = access.readSync(length);
-    content.addAll(utf8.decode(bytes).split('\n'));
-
-    return content;
-  }
+  List<String> getInputContentSync() => inputFile.readAsLinesSync();
 
   Future<List<String>> getInputContent() => inputFile.readAsLines();
 }

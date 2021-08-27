@@ -1,20 +1,21 @@
+import 'dart:io';
+
 void main() {
-  const String partOne = 'Hello';
-  const String partTwo = 'World';
+  const template =
+      '/summon armor_stand ~ ~ ~ {ShowArms:1b,ArmorItems:[{},{},{},{}],HandItems:[{id:"\$item",Count:64b, tag:{\$ench}}]}';
 
-  // The following syntax deactivates a lint on a per-line bases:
-  print('$partOne $partTwo');
-}
+  while (true) {
+    stdout.write('Item :: ');
+    var item = stdin.readLineSync()!;
 
-abstract class Base {
-  int methodA(int foo);
-  String methodB(String foo);
-}
+    stdout.write('Ench :: ');
+    var rawEnch = stdin.readLineSync()!;
+    var ench = rawEnch.substring(0, rawEnch.length - 1);
+    print(ench);
 
-class Sub extends Base {
-  @override
-  int methodA(int bar) => bar;
+    stdout.write(
+        'Result ::\n${template.replaceFirst("\$item", item).replaceFirst("\$ench", ench)}\n\n');
+  }
 
-  @override
-  String methodB(String bar) => bar;
+  //print('/summon armor_stand ~ ~ ~ {ShowArms:1b,ArmorItems:[{},{},{},{}],HandItems:[{id:"diamond_sword{Enchantments:[{id:unbreaking,lvl:1}]}",Count:64b},{}]}')
 }
