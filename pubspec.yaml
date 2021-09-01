@@ -16,4 +16,4 @@ dev_dependencies:
 dependencies: 
   characters: ^1.1.0
   collection: ^1.15.0
-  list_ext: ^1.0.2
+  http:
