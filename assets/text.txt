@@ -1,9 +1,0 @@
-Dart
-is
-cool
-language
-but
-Kotlin
-I
-like
-more
