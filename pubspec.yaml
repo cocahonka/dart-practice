@@ -16,5 +16,8 @@ dev_dependencies:
 dependencies: 
   characters: ^1.1.0
   collection: ^1.15.0
+  list_ext: ^1.0.2
+  english_words: ^4.0.0
   http:
   test:
+  console: ^4.1.0
